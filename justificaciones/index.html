@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Justificaciones · Colegio Lumen</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .modal-enter { animation: modalIn 0.2s ease-out; }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center shadow-sm">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <h1 class="text-lg font-bold text-slate-900">Colegio Lumen</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="text-right hidden sm:block">
+          <p class="text-sm font-semibold text-slate-900">María Isabel Fernández</p>
+          <p class="text-xs text-slate-500">Estudiante</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Avatar" class="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex gap-1 overflow-x-auto">
+        <a href="../mi-perfil/index.html" class="flex items-center gap-2 px-4 py-3.5 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          Mi Perfil
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-3.5 text-sm font-semibold text-primary-600 border-b-2 border-primary-600">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Justificaciones
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-3.5 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          Calificaciones
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-3.5 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Horario
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+    <!-- Page header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <div>
+        <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Mis Justificaciones</h2>
+        <p class="text-sm text-slate-500 mt-1">Consulta y gestiona tus justificaciones de inasistencia</p>
+      </div>
+      <button id="btnNueva" class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-all">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        Nueva justificación
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-5 flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center">
+          <svg class="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-sm text-slate-500">Pendientes</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl border border-primary-100 shadow-card p-5 flex items-center gap-4 ring-1 ring-primary-50">
+        <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center">
+          <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-slate-900">5</p>
+          <p class="text-sm text-slate-500">Aprobadas</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-5 flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
+          <svg class="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-sm text-slate-500">Rechazadas</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div class="flex gap-2">
+        <button class="px-4 py-2 rounded-lg text-sm font-semibold bg-primary-600 text-white">Todas</button>
+        <button class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100">Pendientes</button>
+        <button class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100">Aprobadas</button>
+      </div>
+      <div class="relative">
+        <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="text" placeholder="Buscar por fecha o motivo..." class="pl-10 pr-4 py-2 w-full sm:w-72 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+      </div>
+    </div>
+
+    <!-- List -->
+    <div class="space-y-3" id="listaJustificaciones">
+      <!-- Item 1 -->
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-5 hover:shadow-md transition-shadow">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-sm font-semibold text-slate-900">21 oct. 2026</span>
+                <span class="text-xs text-slate-400">· Miércoles</span>
+              </div>
+              <p class="text-sm text-slate-700 font-medium">Cita médica</p>
+              <p class="text-xs text-slate-500 mt-0.5">Certificado médico adjunto · Docente: Matemática</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Aprobada
+            </span>
+            <button class="text-sm font-medium text-primary-600 hover:text-primary-700">Ver detalles →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-5 hover:shadow-md transition-shadow">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-sm font-semibold text-slate-900">12 oct. 2026</span>
+                <span class="text-xs text-slate-400">· Lunes</span>
+              </div>
+              <p class="text-sm text-slate-700 font-medium">Calamidad doméstica</p>
+              <p class="text-xs text-slate-500 mt-0.5">Asunto familiar · Docente: Lengua y Literatura</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Aprobada
+            </span>
+            <button class="text-sm font-medium text-primary-600 hover:text-primary-700">Ver detalles →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-5 hover:shadow-md transition-shadow">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-sm font-semibold text-slate-900">19 sep. 2026</span>
+                <span class="text-xs text-slate-400">· Viernes</span>
+              </div>
+              <p class="text-sm text-slate-700 font-medium">Certificado médico</p>
+              <p class="text-xs text-slate-500 mt-0.5">Enfermedad · Docente: Ciencias Naturales</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Aprobada
+            </span>
+            <button class="text-sm font-medium text-primary-600 hover:text-primary-700">Ver detalles →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty state tip -->
+    <div class="mt-8 text-center text-sm text-slate-500">
+      <p>No tienes justificaciones pendientes.</p>
+      <p class="mt-1">¡Sigue así! Tu registro de asistencia refleja compromiso y responsabilidad.</p>
+    </div>
+
+    <!-- Flujo informativo -->
+    <div class="mt-10 bg-white rounded-2xl border border-slate-100 shadow-card p-6">
+      <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Flujo de aprobación (según Reglamento del Ministerio de Educación)
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm font-bold flex-shrink-0">1</div>
+          <div>
+            <p class="text-sm font-semibold text-slate-900">Estudiante / Representante</p>
+            <p class="text-xs text-slate-500 mt-0.5">Registra la justificación y adjunta evidencia</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm font-bold flex-shrink-0">2</div>
+          <div>
+            <p class="text-sm font-semibold text-slate-900">Docente de la materia</p>
+            <p class="text-xs text-slate-500 mt-0.5">Recibe notificación automática de la falta justificada</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm font-bold flex-shrink-0">3</div>
+          <div>
+            <p class="text-sm font-semibold text-slate-900">Tutor de curso</p>
+            <p class="text-xs text-slate-500 mt-0.5">Visualiza y da seguimiento al caso</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm font-bold flex-shrink-0">4</div>
+          <div>
+            <p class="text-sm font-semibold text-slate-900">Inspector de curso</p>
+            <p class="text-xs text-slate-500 mt-0.5">Aprueba o rechaza la justificación (autoridad final)</p>
+          </div>
+        </div>
+      </div>
+      <p class="mt-4 text-xs text-slate-500 bg-slate-50 rounded-lg px-4 py-3">
+        La comunicación se genera automáticamente al momento de registrar la justificación. El sistema notifica al docente de la asignatura, al tutor de curso y al inspector. La aprobación definitiva la realiza el Inspector de curso conforme al reglamento vigente.
+      </p>
+    </div>
+  </main>
+
+  <!-- ==================== MODAL NUEVA JUSTIFICACIÓN ==================== -->
+  <div id="modalOverlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 hidden items-center justify-center p-4">
+    <div id="modalContent" class="bg-white rounded-2xl shadow-2xl w-full max-w-lg modal-enter max-h-[90vh] overflow-y-auto">
+      <!-- Header -->
+      <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100 sticky top-0 bg-white rounded-t-2xl">
+        <h3 class="text-lg font-bold text-slate-900">Nueva Justificación de Inasistencia</h3>
+        <button id="btnCerrarModal" class="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <form id="formJustificacion" class="p-6 space-y-5">
+        <!-- Info banner -->
+        <div class="flex items-start gap-3 bg-primary-50 border border-primary-100 rounded-xl px-4 py-3">
+          <svg class="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="text-sm text-primary-800">El docente de la materia, el tutor de curso y el inspector serán notificados automáticamente.</p>
+        </div>
+
+        <!-- Fecha -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5">Fecha de la falta <span class="text-red-500">*</span></label>
+          <input type="date" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+        </div>
+
+        <!-- Materia / Asignatura -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5">Asignatura / Materia <span class="text-red-500">*</span></label>
+          <select required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white">
+            <option value="">Selecciona la materia</option>
+            <option>Matemática</option>
+            <option>Lengua y Literatura</option>
+            <option>Ciencias Naturales</option>
+            <option>Estudios Sociales</option>
+            <option>Inglés</option>
+            <option>Educación Física</option>
+            <option>Educación Cultural y Artística</option>
+            <option>Otra</option>
+          </select>
+          <p class="text-xs text-slate-500 mt-1">Se notificará automáticamente al docente de esta asignatura.</p>
+        </div>
+
+        <!-- Motivo -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-2">Motivo <span class="text-red-500">*</span></label>
+          <div class="grid grid-cols-2 gap-2" id="motivos">
+            <label class="motivo-option cursor-pointer">
+              <input type="radio" name="motivo" value="cita_medica" class="sr-only peer" required>
+              <div class="px-3 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 peer-checked:border-primary-500 peer-checked:bg-primary-50 peer-checked:text-primary-700 transition-all text-center">
+                Cita médica
+              </div>
+            </label>
+            <label class="motivo-option cursor-pointer">
+              <input type="radio" name="motivo" value="calamidad" class="sr-only peer">
+              <div class="px-3 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 peer-checked:border-primary-500 peer-checked:bg-primary-50 peer-checked:text-primary-700 transition-all text-center">
+                Calamidad doméstica
+              </div>
+            </label>
+            <label class="motivo-option cursor-pointer">
+              <input type="radio" name="motivo" value="familiar" class="sr-only peer">
+              <div class="px-3 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 peer-checked:border-primary-500 peer-checked:bg-primary-50 peer-checked:text-primary-700 transition-all text-center">
+                Asunto familiar
+              </div>
+            </label>
+            <label class="motivo-option cursor-pointer">
+              <input type="radio" name="motivo" value="enfermedad" class="sr-only peer">
+              <div class="px-3 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 peer-checked:border-primary-500 peer-checked:bg-primary-50 peer-checked:text-primary-700 transition-all text-center">
+                Enfermedad
+              </div>
+            </label>
+            <label class="motivo-option cursor-pointer col-span-2">
+              <input type="radio" name="motivo" value="otro" class="sr-only peer">
+              <div class="px-3 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 peer-checked:border-primary-500 peer-checked:bg-primary-50 peer-checked:text-primary-700 transition-all text-center">
+                Otro
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Descripción -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5">Descripción / Detalle</label>
+          <textarea rows="3" placeholder="Describe brevemente el motivo de la inasistencia..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"></textarea>
+        </div>
+
+        <!-- Adjuntar documento -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5">Adjuntar documento (opcional)</label>
+          <div class="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-primary-300 hover:bg-primary-50/30 transition-colors cursor-pointer" id="dropzone">
+            <svg class="w-8 h-8 text-slate-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            <p class="text-sm font-medium text-slate-700">Arrastra el certificado o haz clic</p>
+            <p class="text-xs text-slate-500 mt-1">PDF o JPG · Máx. 5 MB</p>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" id="fileInput" />
+          </div>
+        </div>
+
+        <!-- Declaración -->
+        <label class="flex items-start gap-3 cursor-pointer">
+          <input type="checkbox" required class="mt-1 w-4 h-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500" />
+          <span class="text-sm text-slate-600">Declaro que la información proporcionada es verídica y estoy de acuerdo con el procedimiento establecido por el Ministerio de Educación.</span>
+        </label>
+
+        <!-- Actions -->
+        <div class="flex gap-3 pt-2">
+          <button type="submit" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            Enviar justificación
+          </button>
+          <button type="button" id="btnCancelar" class="px-5 py-3 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition-colors">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('modalOverlay');
+    const btnNueva = document.getElementById('btnNueva');
+    const btnCerrar = document.getElementById('btnCerrarModal');
+    const btnCancelar = document.getElementById('btnCancelar');
+    const form = document.getElementById('formJustificacion');
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+
+    function openModal() {
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      overlay.classList.add('hidden');
+      overlay.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    btnNueva.addEventListener('click', openModal);
+    btnCerrar.addEventListener('click', closeModal);
+    btnCancelar.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+    dropzone.addEventListener('click', () => fileInput.click());
+    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('border-primary-400', 'bg-primary-50'); });
+    dropzone.addEventListener('dragleave', () => { dropzone.classList.remove('border-primary-400', 'bg-primary-50'); });
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('border-primary-400', 'bg-primary-50');
+      if (e.dataTransfer.files.length) {
+        fileInput.files = e.dataTransfer.files;
+        dropzone.querySelector('p').textContent = e.dataTransfer.files[0].name;
+      }
+    });
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) dropzone.querySelector('p').textContent = fileInput.files[0].name;
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('✅ Justificación enviada correctamente.\n\nSe ha notificado automáticamente a:\n• Docente de la materia\n• Tutor de curso\n• Inspector de curso\n\nEl Inspector revisará y aprobará la justificación.');
+      closeModal();
+      form.reset();
+    });
+  </script>
+</body>
+</html>
