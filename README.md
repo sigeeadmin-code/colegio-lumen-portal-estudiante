@@ -1,98 +1,61 @@
-# Colegio Lumen – Portal del Estudiante
+# Colegio Lumen – Portal del Estudiante & Especificaciones
 
-Módulos implementados para el acceso de **estudiante**:
+## Módulos del estudiante (implementados)
 
-- **Mi Perfil** (solo lectura)
-- **Justificaciones de Inasistencia** (con flujo oficial del Ministerio de Educación)
-
----
-
-## 1. Mi Perfil (solo lectura)
-
-Ruta: `/mi-perfil/`
-
-Muestra de forma clara y profesional:
-
-- Datos personales del estudiante
-- Datos de los padres de familia
-- **Representante de emergencia** con botón de llamada directa (`tel:`)
-
-Todo es de solo visualización. No se permite edición desde el acceso del estudiante.
+| Módulo | Ruta | Descripción |
+|--------|------|-------------|
+| **Mi Perfil** | `/mi-perfil/` | Solo lectura. Datos personales, familiares y representante de emergencia con botón **Llamar**. |
+| **Justificaciones** | `/justificaciones/` | Listado + modal profesional. Flujo: Estudiante → Docente de la materia → Tutor → Inspector. |
 
 ---
 
-## 2. Justificaciones de Inasistencia
+## Flujo de Oficios (arquitectura correcta)
 
-Ruta: `/justificaciones/`
+> **Regla de oro:** Todo oficio vive en el módulo **Oficios / documental**.  
+> Los oficios generados desde Calificaciones o Asistencia **se enlazan**, no se crean como documentos independientes.
 
-### Flujo de aprobación (según Reglamento del Ministerio de Educación del Ecuador)
+### Documentación completa del flujo
 
-Cuando el estudiante (o su representante) registra una justificación:
+Ver: **[docs/FLUJO-OFICIOS-ENLAZADO.md](docs/FLUJO-OFICIOS-ENLAZADO.md)**
 
-1. **Estudiante / Representante**  
-   Registra la fecha, la asignatura, el motivo y adjunta evidencia (certificado médico, etc.).
-
-2. **Docente de la materia**  
-   Recibe **notificación automática** de que la falta de su asignatura ha sido justificada.  
-   (La falta pasa a estado “justificado” en su registro de asistencia).
-
-3. **Tutor de curso**  
-   Visualiza el caso y da seguimiento.  
-   Puede ver el historial y el estado del trámite.
-
-4. **Inspector de curso**  
-   Es la **autoridad que aprueba o rechaza** la justificación de forma definitiva, conforme al reglamento vigente.
-
-### Comunicación automática
-
-Al momento de enviar la justificación el sistema genera las notificaciones a:
-
-- Docente de la asignatura seleccionada
-- Tutor de curso
-- Inspector de curso
-
-No es necesario enviar oficios manuales para el flujo estándar de justificación de inasistencia.
-
----
-
-## 3. Módulo de Oficios (en elaboración)
-
-Se está diseñando un **módulo de recorrido de oficios** que permitirá:
-
-- Crear oficios formales (solicitudes, informes, comunicaciones)
-- Definir el circuito de revisión y firma (recorrido)
-- Seguimiento de estado (borrador → en revisión → firmado → archivado)
-- Notificaciones a cada actor del recorrido
-- Generación de PDF con membrete institucional
-
-Este módulo será la base para trámites más formales (permisos especiales, reportes de inspectoría, etc.) y se integrará con el flujo de justificaciones cuando se requiera un documento oficial.
-
----
-
-## Estructura del proyecto
+### Resumen rápido
 
 ```
-colegio-lumen/
-├── mi-perfil/
-│   └── index.html          # Perfil del estudiante (solo lectura)
-├── justificaciones/
-│   └── index.html          # Listado + modal de nueva justificación
-├── docs/                   # Documentación adicional (próximamente)
+Calificaciones / Alertas de rendimiento  ──┐
+                                           ├──►  OFICIOS / DOCUMENTAL
+Asistencia / Justificaciones             ──┘         (módulo único)
+                                                      • Lista
+                                                      • Recorrido (Tutor → Inspector → Secretaría)
+                                                      • Estados, versiones, editor
+```
+
+- **“+ Nuevo documento”** → solo para oficios manuales / ad-hoc.
+- Generar oficio desde Calificaciones o Asistencia → crea el registro **dentro** de Oficios / documental y redirige al detalle de ese documento.
+
+---
+
+## Estructura del repositorio
+
+```
+colegio-lumen-portal-estudiante/
+├── index.html                      # Inicio
+├── mi-perfil/index.html            # Perfil estudiante (solo lectura)
+├── justificaciones/index.html      # Justificaciones + modal
+├── docs/
+│   └── FLUJO-OFICIOS-ENLAZADO.md   # Especificación del flujo de oficios
 └── README.md
 ```
 
 ## Tecnologías
 
-- HTML5 semántico
-- Tailwind CSS (CDN)
+- HTML5 + Tailwind CSS (CDN)
 - JavaScript vanilla
-- Diseño responsive y accesible
+- Responsive
 
 ## Despliegue
 
-Este repositorio está preparado para ser desplegado por Claude o cualquier plataforma de hosting estático (Vercel, Netlify, GitHub Pages, etc.).
+Listo para GitHub Pages, Vercel, Netlify o para que Claude lo despliegue.
 
 ---
 
-**Colegio Lumen** · Portal Académico  
-Cumplimiento del Reglamento del Ministerio de Educación del Ecuador.
+**Colegio Lumen** · Cumplimiento del Reglamento del Ministerio de Educación del Ecuador.
