@@ -26,6 +26,7 @@ import { RouteMini } from '@/components/ui/RouteStepper';
 import Tooltip from '@/components/ui/Tooltip';
 import EmptyState from '@/components/ui/EmptyState';
 import TableSkeleton from '@/components/ui/TableSkeleton';
+import CargoDecisionModals, { type ModalCargo } from '@/app/bandeja-por-cargo/components/CargoDecisionModals';
 
 const CARGOS: { key: CargoDespacho | 'todos'; label: string }[] = [
   { key: 'inspector_general', label: 'Inspector General' },
@@ -44,6 +45,8 @@ export default function CargoColaTable() {
   const [filtro, setFiltro] = useState<FiltroCola>('todos');
   const [cargando, setCargando] = useState(false);
   const [ultimaCarga, setUltimaCarga] = useState('28/10/2026 08:40');
+  const [modalCargo, setModalCargo] = useState<ModalCargo>(null);
+  const [docActivo, setDocActivo] = useState<DocumentoCola | null>(null);
 
   const conteoPorCargo = useMemo(() => {
     const out: Record<string, number> = {};
@@ -82,13 +85,18 @@ export default function CargoColaTable() {
     }, 700);
   };
 
-  const decidir = (d: DocumentoCola, accion: 'aprobar' | 'observar' | 'rechazar') => {
-    const labels = {
-      aprobar: 'aprobado y avanzó al siguiente paso',
-      observar: 'devuelto al emisor con observación',
-      rechazar: 'rechazado y cerrado',
-    };
-    toast.success(`${d.numero}: ${labels[accion]}`);
+  const abrirModal = (d: DocumentoCola, accion: Exclude<ModalCargo, null>) => {
+    setDocActivo(d);
+    setModalCargo(accion);
+  };
+
+  const onDecisionHecha = (tipo: Exclude<ModalCargo, null>, motivo?: string) => {
+    if (!docActivo) return;
+    if (tipo === 'aprobar') toast.success(`${docActivo.numero}: aprobado y avanzó al siguiente paso`);
+    if (tipo === 'observar') toast.success(`${docActivo.numero}: devuelto al emisor`);
+    if (tipo === 'rechazar') toast.success(`${docActivo.numero}: trámite rechazado y cerrado`);
+    setDocActivo(null);
+    setModalCargo(null);
   };
 
   return (
@@ -307,7 +315,7 @@ export default function CargoColaTable() {
                       <Tooltip label="Aprobar y avanzar">
                         <button
                           type="button"
-                          onClick={() => decidir(d, 'aprobar')}
+                          onClick={() => abrirModal(d, 'aprobar')}
                           className="rounded-md p-1.5 text-success transition-all duration-150 hover:bg-success/10 active:scale-95"
                           aria-label={`Aprobar ${d.numero}`}
                         >
@@ -317,7 +325,7 @@ export default function CargoColaTable() {
                       <Tooltip label="Observar (devolver)">
                         <button
                           type="button"
-                          onClick={() => decidir(d, 'observar')}
+                          onClick={() => abrirModal(d, 'observar')}
                           className="rounded-md p-1.5 text-warning transition-all duration-150 hover:bg-warning/10 active:scale-95"
                           aria-label={`Observar ${d.numero}`}
                         >
@@ -327,7 +335,7 @@ export default function CargoColaTable() {
                       <Tooltip label="Rechazar">
                         <button
                           type="button"
-                          onClick={() => decidir(d, 'rechazar')}
+                          onClick={() => abrirModal(d, 'rechazar')}
                           className="rounded-md p-1.5 text-destructive transition-all duration-150 hover:bg-destructive/10 active:scale-95"
                           aria-label={`Rechazar ${d.numero}`}
                         >
@@ -342,6 +350,16 @@ export default function CargoColaTable() {
           </table>
         </div>
       )}
+
+      <CargoDecisionModals
+        modal={modalCargo}
+        documento={docActivo}
+        onClose={() => {
+          setModalCargo(null);
+          setDocActivo(null);
+        }}
+        onDone={onDecisionHecha}
+      />
     </section>
   );
 }
