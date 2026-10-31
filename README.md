@@ -1,59 +1,71 @@
-# Colegio Lumen – Portal del Estudiante & Especificaciones
+# Colegio Lumen – Portal del Estudiante & Módulo Oficios
 
-## Módulos del estudiante (implementados)
+## Estado del repositorio
 
-| Módulo | Ruta | Descripción |
-|--------|------|-------------|
-| **Mi Perfil** | `/mi-perfil/` | Solo lectura. Datos personales, familiares y representante de emergencia con botón **Llamar**. |
-| **Justificaciones** | `/justificaciones/` | Listado + modal profesional. Flujo: Estudiante → Docente de la materia → Tutor → Inspector. |
-
----
-
-## Flujo de Oficios (arquitectura correcta)
-
-> **Regla de oro:** Todo oficio vive en el módulo **Oficios / documental**.  
-> Los oficios generados desde Calificaciones o Asistencia **se enlazan**, no se crean como documentos independientes.
-
-### Documentación
-
-| Documento | Contenido |
-|-----------|-----------|
-| [docs/FLUJO-OFICIOS-ENLAZADO.md](docs/FLUJO-OFICIOS-ENLAZADO.md) | Cómo se enlazan los oficios desde Calificaciones y Asistencia |
-| [docs/UI-OFICIOS-DASHBOARD.md](docs/UI-OFICIOS-DASHBOARD.md) | **UI de referencia completa** del dashboard de Oficios (bandeja emisor, bandeja por cargo, detalle, cola de despacho) |
-| `docs/oficios-ui/*.png` | Capturas de pantalla del diseño objetivo |
-
-### Resumen del flujo
-
-```
-Calificaciones / Alertas de rendimiento  ──┐
-                                           ├──►  OFICIOS / DOCUMENTAL
-Asistencia / Justificaciones             ──┘         (módulo único)
-                                                      • Bandeja del emisor
-                                                      • Bandeja por cargo
-                                                      • Detalle + ruta + versiones
-                                                      • Cola de despacho con SLA
-```
+| Módulo | Estado | Ubicación |
+|--------|--------|-----------|
+| **Mi Perfil** (estudiante) | Completo | `mi-perfil/` |
+| **Justificaciones** (estudiante) | Completo | `justificaciones/` |
+| **Oficios / Documental** | **En progreso** | `oficios/` |
+| Flujo de enlazado | Documentado | `docs/FLUJO-OFICIOS-ENLAZADO.md` |
+| UI de referencia | Documentado | `docs/UI-OFICIOS-DASHBOARD.md` |
 
 ---
 
-## Estructura del repositorio
+## Módulo Oficios (`oficios/`)
 
-```
-colegio-lumen-portal-estudiante/
-├── index.html
-├── mi-perfil/index.html
-├── justificaciones/index.html
-├── docs/
-│   ├── FLUJO-OFICIOS-ENLAZADO.md
-│   ├── UI-OFICIOS-DASHBOARD.md      ← UI de referencia
-│   └── oficios-ui/                 ← capturas PNG (subir)
-└── README.md
-```
+Código React/Next.js (SigeeOficios) para el tráfico documental.
 
-## Despliegue
+### Ya subido a GitHub
 
-Listo para GitHub Pages, Vercel, Netlify o para que Claude lo despliegue.
+- `oficios/README.md`
+- `oficios/app/layout.tsx`
+- `oficios/app/bandeja-emisor/page.tsx` — Bandeja del emisor
+- `oficios/app/detalle-del-documento/page.tsx` — Detalle del documento
+
+### Componentes del detalle (código fuente disponible)
+
+Deben estar en `oficios/app/detalle-del-documento/components/`:
+
+| Componente | Función |
+|------------|---------|
+| DocumentoHeader | Cabecera + ruta de aprobación + observación |
+| DetalleTabs | Pestañas Documento / Recorrido / Seguimientos / Versiones |
+| PlantillaOficio | Visualizar el documento (vista entrega / auditoría) |
+| RecorridoTimeline | Seguir el trámite (historial inmutable) |
+| SeguimientosPanel | Documentos hijo enlazados |
+| VersionesPanel | Control de versiones del PDF |
+| ResumenLateral | Indicadores + documentos relacionados |
+| AccionesPanel | Acciones según rol (corregir, reenviar, entregar) |
+| DetalleModals | Modales de reenvío, entrega y seguimiento |
+| EsperaPasoChart | Gráfico de espera por paso |
+
+### Capacidades del módulo
+
+- Documentos generados por **docentes, tutor, inspector general, rector, vicerrector**
+- **Visualizar** el documento (plantilla formal imprimible)
+- **Seguir el recorrido** del trámite (timeline + historial)
+- Acciones según estado y rol
+- Versiones controladas y documentos relacionados
+
+### Dependencias
+
+Next.js (App Router), Tailwind, lucide-react, recharts, react-hook-form, sonner.  
+Datos mock: `@/lib/oficios-data`  
+Componentes compartidos: `AppLayout`, `EmisorMetrics`, `EmisorTable`, badges, etc.
 
 ---
 
-**Colegio Lumen** · Cumplimiento del Reglamento del Ministerio de Educación del Ecuador.
+## Flujo de enlazado (recordatorio)
+
+```
+Calificaciones / Alertas  ──┐
+                            ├──►  OFICIOS / DOCUMENTAL (este módulo)
+Asistencia / Justificaciones ──┘
+```
+
+Ver `docs/FLUJO-OFICIOS-ENLAZADO.md`.
+
+---
+
+**Colegio Lumen** · Ministerio de Educación del Ecuador
