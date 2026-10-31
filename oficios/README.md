@@ -2,43 +2,46 @@
 
 Código React/Next.js del módulo de tráfico documental.
 
-## Pantallas implementadas
+## Estado en GitHub
 
-| Ruta | Descripción |
-|------|-------------|
-| `app/bandeja-emisor/page.tsx` | Bandeja del emisor (Tutor, Docente…) |
-| `app/detalle-del-documento/page.tsx` | Detalle del documento |
+### Subidos ✓
 
-## Componentes del detalle
+| Archivo | Función |
+|---------|--------|
+| `app/bandeja-emisor/page.tsx` | Bandeja del emisor |
+| `app/detalle-del-documento/page.tsx` | Página de detalle |
+| `app/layout.tsx` | Layout raíz |
+| `app/not-found.tsx` | 404 |
+| `components/AccionesPanel.tsx` | Acciones según rol/estado |
+| `components/DocumentoHeader.tsx` | Cabecera + ruta de aprobación |
+| `components/PlantillaOficio.tsx` | **Visualizar documento** (vista entrega) |
+| `components/EsperaPasoChart.tsx` | Gráfico espera por paso |
+| `components/VersionesPanel.tsx` | Versiones del PDF |
+| `components/SeguimientosPanel.tsx` | Documentos hijo enlazados |
+| `components/ResumenLateral.tsx` | Indicadores + relacionados |
 
-- **DocumentoHeader** – Cabecera + ruta de aprobación + mensaje de observación
-- **DetalleTabs** – Pestañas: Documento · Recorrido · Seguimientos · Versiones
-- **PlantillaOficio** – Vista de entrega del oficio (imprimible)
-- **RecorridoTimeline** – Historial inmutable del trámite
-- **SeguimientosPanel** – Documentos hijo enlazados
-- **VersionesPanel** – Versiones del PDF (límite anti-abuso)
-- **ResumenLateral** – Indicadores + documentos relacionados
-- **AccionesPanel** – Corregir, reenviar, imprimir, registrar entrega
-- **DetalleModals** – Modales de reenvío, entrega y seguimiento
-- **EsperaPasoChart** – Gráfico de espera por paso
+### Pendientes de subir (código local disponible)
 
-## Capacidades
+| Archivo | Función |
+|---------|--------|
+| `components/RecorridoTimeline.tsx` | **Seguir el trámite** (historial inmutable) |
+| `components/DetalleTabs.tsx` | Pestañas Documento/Recorrido/Seguimientos/Versiones |
+| `components/DetalleModals.tsx` | Modales reenviar/entrega/seguimiento |
 
-- Documentos generados por: docentes, tutor, inspector general, rector, vicerrector
-- Visualizar documento (vista de entrega / vista con recorrido)
-- Seguir el recorrido del trámite (timeline + historial inmutable)
-- Acciones según rol y estado (editar, reenviar, observar, aprobar, entregar)
-- Versiones controladas del PDF
-- Documentos relacionados y seguimientos enlazados
+> Estos 3 archivos están en el entorno de trabajo y se pueden agregar en el siguiente commit.
 
-## Dependencias esperadas
+## Capacidades cubiertas
 
-- Next.js (App Router)
-- Tailwind CSS
-- lucide-react
-- recharts
-- react-hook-form
-- sonner (toasts)
-- Datos mock en `@/lib/oficios-data`
+- Documentos de **docentes, tutor, inspector, rector, vicerrector**
+- **Visualizar** el documento (`PlantillaOficio`)
+- **Seguir el recorrido** (`DocumentoHeader` + `RecorridoTimeline`)
+- Acciones según rol (corregir, reenviar, entregar, imprimir)
+- Versiones, seguimientos y documentos relacionados
 
-Este código debe integrarse con el flujo de enlazado definido en `docs/FLUJO-OFICIOS-ENLAZADO.md`.
+## Dependencias
+
+Next.js App Router, Tailwind, lucide-react, recharts, react-hook-form, sonner.  
+Datos: `@/lib/oficios-data`  
+UI compartida: `AppLayout`, badges, `RouteStepper`, `Modal`, `EmptyState`, `EmisorMetrics`, `EmisorTable`
+
+Integrar con `docs/FLUJO-OFICIOS-ENLAZADO.md`.
