@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { Search, Plus, Eye, Pencil, Send, Trash2, Printer, ArrowUp, ArrowDown, ChevronLeft, ChevronRight, Columns3, CornerUpLeft, RefreshCw, X, FileX2 } from 'lucide-react';
+import { Search, Eye, Pencil, Send, Trash2, Printer, ArrowUp, ArrowDown, ChevronLeft, ChevronRight, Columns3, CornerUpLeft, RefreshCw, X, FileX2 } from 'lucide-react';
 import {
   DOCUMENTOS,
   TIPO_LABEL,
@@ -169,14 +169,6 @@ export default function EmisorTable() {
               <RefreshCw className={`h-4 w-4 ${cargando ? 'animate-spin' : ''}`} />
               Actualizar
             </button>
-            <button
-              type="button"
-              onClick={() => toast.success('Se abrió el asistente de nuevo documento (seleccione el tipo)')}
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95"
-            >
-              <Plus className="h-4 w-4" />
-              Nuevo documento
-            </button>
           </div>
         </div>
 
@@ -295,10 +287,8 @@ export default function EmisorTable() {
           description={
             busqueda || tipo !== 'todos'
               ? 'Prueba con otro N° de documento, otro estudiante o quita el filtro de tipo.'
-              : 'Cuando generes un oficio, plan o acta desde una alerta, aparecerá aquí con su recorrido.'
+              : 'Los oficios se generan desde Análisis de calificaciones, Asistencia o Justificaciones. Al guardar allí, aparecerán aquí automáticamente.'
           }
-          actionLabel="Nuevo documento"
-          onAction={() => toast.success('Se abrió el asistente de nuevo documento (seleccione el tipo)')}
         />
       ) : (
         <div className="overflow-x-auto scroll-thin">
