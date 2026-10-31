@@ -1,48 +1,38 @@
 # Módulo Oficios / Documental (SigeeOficios)
 
-## Estado: CASI COMPLETO (código de pantallas principales en el repo)
+## Pantallas implementadas
 
-### Subido a GitHub ✓
+### Emisor (Tutor / Docente)
+| Ruta | Descripción |
+|------|-------------|
+| `app/bandeja-emisor/page.tsx` | Bandeja del emisor |
+| `app/components/EmisorMetrics.tsx` | KPIs + gráfico carga por estado |
+| `app/components/EmisorTable.tsx` | Mis documentos (filtros, paginación, acciones) |
+| `app/detalle-del-documento/*` | Detalle: visualizar, recorrido, versiones, modales |
 
-#### Bandeja del emisor
-- `app/bandeja-emisor/page.tsx`
-- `app/components/EmisorMetrics.tsx` — KPIs (Observados, En ruta, Borradores, etc.)
-- `app/components/CargaEstadoChart.tsx` — gráfico de carga por estado
+### Autoridad (Inspector / DECE / Rector / Secretaría)
+| Ruta | Descripción |
+|------|-------------|
+| `app/bandeja-por-cargo/page.tsx` | **Bandeja por cargo** |
+| `app/bandeja-por-cargo/components/CargoMetrics.tsx` | Pendientes, espera máx/media, resueltos, devoluciones |
+| `app/bandeja-por-cargo/components/CargoColaTable.tsx` | Cola de despacho ordenada por SLA |
+| `app/components/EsperaCargoChart.tsx` | Espera media por cargo |
+| `app/components/LlegadasResolucionesChart.tsx` | Llegadas vs resoluciones por día |
 
-#### Detalle del documento
-- `app/detalle-del-documento/page.tsx`
-- `DocumentoHeader.tsx` — cabecera + ruta de aprobación
-- `DetalleTabs.tsx` — pestañas Documento / Recorrido / Seguimientos / Versiones
-- `PlantillaOficio.tsx` — **visualizar el documento**
-- `RecorridoTimeline.tsx` — **seguir el trámite** (historial inmutable)
-- `AccionesPanel.tsx` — corregir, reenviar, entregar, imprimir
-- `SeguimientosPanel.tsx`, `VersionesPanel.tsx`, `ResumenLateral.tsx`
-- `EsperaPasoChart.tsx`
+## Capacidades
 
-### Aún faltan en el repo (código listo localmente)
+- Documentos de docentes, tutor, inspector, rector, vicerrector, DECE, secretaría
+- Visualizar documento (PlantillaOficio)
+- Seguir recorrido del trámite (RecorridoTimeline)
+- Aprobar / observar / rechazar desde la cola de despacho
+- SLA visible (24 h / 48 h, badge Vencido)
+- Versiones controladas y documentos relacionados
 
-| Archivo | Tamaño | Función |
-|---------|--------|--------|
-| `app/components/EmisorTable.tsx` | ~35 KB | Tabla "Mis documentos" (filtros, paginación, acciones) |
-| `detalle.../DetalleModals.tsx` | ~12 KB | Modales: reenviar, registrar entrega, generar seguimiento |
+## Aún necesario para correr
 
-### Dependencias compartidas que Claude debe tener o crear
+1. **`lib/oficios-data.ts`** — incluir `COLA_DESPACHO`, `ESPERA_POR_CARGO`, `LLEGADAS_RESOLUCIONES`, `DOCUMENTOS`, etc.
+2. Componentes UI: `AppLayout`, `Badge`, `RouteStepper`, `Modal`, `MetricCard`, `EmptyState`, `Tooltip`, `TableSkeleton`
+3. Backend / notificaciones reales
+4. Enlace desde Calificaciones y Asistencia → este módulo
 
-- `@/lib/oficios-data` — datos mock (DOCUMENTOS, HISTORIAL, NOTAS, etc.)
-- `@/components/AppLayout`
-- `@/components/ui/Badge`, `RouteStepper`, `Modal`, `EmptyState`, `MetricCard`, `Tooltip`, `TableSkeleton`
-
-### Capacidades cubiertas con lo subido
-
-1. Documentos de autoridades (tutor, inspector, rector…)
-2. **Visualizar** el documento (`PlantillaOficio`)
-3. **Seguir el recorrido** del trámite (`RecorridoTimeline` + `DocumentoHeader`)
-4. KPIs de la bandeja del emisor
-5. Acciones según rol y estado
-
-### Qué falta para correr la app completa
-
-1. Subir `EmisorTable.tsx` y `DetalleModals.tsx`
-2. Crear/adaptar `lib/oficios-data.ts` y componentes UI compartidos
-3. Bandeja por cargo (Inspector/DECE) — no incluida en estos archivos
-4. Conexión real a backend (Supabase edge functions mencionadas en comentarios)
+Ver `docs/FLUJO-OFICIOS-ENLAZADO.md` y `docs/UI-OFICIOS-DASHBOARD.md`.
