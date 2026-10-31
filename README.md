@@ -14,23 +14,25 @@
 > **Regla de oro:** Todo oficio vive en el módulo **Oficios / documental**.  
 > Los oficios generados desde Calificaciones o Asistencia **se enlazan**, no se crean como documentos independientes.
 
-### Documentación completa del flujo
+### Documentación
 
-Ver: **[docs/FLUJO-OFICIOS-ENLAZADO.md](docs/FLUJO-OFICIOS-ENLAZADO.md)**
+| Documento | Contenido |
+|-----------|-----------|
+| [docs/FLUJO-OFICIOS-ENLAZADO.md](docs/FLUJO-OFICIOS-ENLAZADO.md) | Cómo se enlazan los oficios desde Calificaciones y Asistencia |
+| [docs/UI-OFICIOS-DASHBOARD.md](docs/UI-OFICIOS-DASHBOARD.md) | **UI de referencia completa** del dashboard de Oficios (bandeja emisor, bandeja por cargo, detalle, cola de despacho) |
+| `docs/oficios-ui/*.png` | Capturas de pantalla del diseño objetivo |
 
-### Resumen rápido
+### Resumen del flujo
 
 ```
 Calificaciones / Alertas de rendimiento  ──┐
                                            ├──►  OFICIOS / DOCUMENTAL
 Asistencia / Justificaciones             ──┘         (módulo único)
-                                                      • Lista
-                                                      • Recorrido (Tutor → Inspector → Secretaría)
-                                                      • Estados, versiones, editor
+                                                      • Bandeja del emisor
+                                                      • Bandeja por cargo
+                                                      • Detalle + ruta + versiones
+                                                      • Cola de despacho con SLA
 ```
-
-- **“+ Nuevo documento”** → solo para oficios manuales / ad-hoc.
-- Generar oficio desde Calificaciones o Asistencia → crea el registro **dentro** de Oficios / documental y redirige al detalle de ese documento.
 
 ---
 
@@ -38,19 +40,15 @@ Asistencia / Justificaciones             ──┘         (módulo único)
 
 ```
 colegio-lumen-portal-estudiante/
-├── index.html                      # Inicio
-├── mi-perfil/index.html            # Perfil estudiante (solo lectura)
-├── justificaciones/index.html      # Justificaciones + modal
+├── index.html
+├── mi-perfil/index.html
+├── justificaciones/index.html
 ├── docs/
-│   └── FLUJO-OFICIOS-ENLAZADO.md   # Especificación del flujo de oficios
+│   ├── FLUJO-OFICIOS-ENLAZADO.md
+│   ├── UI-OFICIOS-DASHBOARD.md      ← UI de referencia
+│   └── oficios-ui/                 ← capturas PNG (subir)
 └── README.md
 ```
-
-## Tecnologías
-
-- HTML5 + Tailwind CSS (CDN)
-- JavaScript vanilla
-- Responsive
 
 ## Despliegue
 
